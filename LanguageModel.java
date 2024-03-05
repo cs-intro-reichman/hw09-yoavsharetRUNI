@@ -97,15 +97,6 @@ public class LanguageModel {
             curr.cp = prev.cp + curr.p;
             prev = curr;
         }
-        // CharData[] probsArray = probs.toArray();
-        // CharData prev = probsArray[probsArray.length - 1];
-        // prev.cp = prev.p;
-        // for(int i = (probsArray.length -2); i>=0; i--){
-        //     // the Char are inserted in reverse order
-        //     CharData curr = probsArray[i];
-        //     curr.cp = prev.cp + curr.p;
-        //     prev = curr;
-        // }
 	}
 
     // Returns a random character from the given probabilities list.
@@ -157,24 +148,6 @@ public class LanguageModel {
 	}
 
     public static void main(String[] args) {
-        // LanguageModel languageModel = new LanguageModel(7,20);
-        // languageModel.train("originofspecies.txt");
-        // String generatedText = languageModel.generate("Natural", 172);
-        // String expectedGeneratedText = "Natural selection, how is it possible, generally much changed\n"+
-        // "simultaneous rotation, when the importance of Batrachians, 393.\n"+
-        // "  Batrachians (frogs, toads, newts) have to modified ";
-        // System.err.println(generatedText);
-
-        // boolean res = stringEqualsNoSpaces(generatedText, expectedGeneratedText);
-        // if (!res){
-        //     System.out.println("Expected: " + expectedGeneratedText);
-        //     System.out.println("Actual: " + generatedText);
-        //     System.out.println("FAIL with windowLength = 7, seed = 20, initialText = Natural, textLength = 172");
-        // }
-        // return res;
-
-
-        // MAIN //
         int windowLength = Integer.parseInt(args[0]);
         String initialText = args[1];
         int generatedTextLength = Integer.parseInt(args[2]);

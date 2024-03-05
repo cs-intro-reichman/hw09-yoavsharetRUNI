@@ -4,19 +4,8 @@
  *  the class represents a list of CharData objects. Likwise, the API of the class does not
  *  mention the existence of the Node objects). */
 public class List {
-
-    // public static void main(String[] args) {
-    //     List l = new List();
-    //     String test = "committee_";
-    //     for(int i =0; i<test.length(); i++){
-    //         l.update(test.charAt(i));
-    //     }
-    //     System.out.println(l.toString());
-    //     System.out.println(l.size);
-    // }
     // Points to the first node in this list
     private Node first;
-    private Node last;
 
     // The number of elements in this list
     private int size;
@@ -41,19 +30,6 @@ public class List {
     public void addFirst(char chr) {
         Node newNode = new Node(new CharData(chr), first);
         this.first = newNode;
-        this.last = newNode;
-        this.size++;
-    }
-
-    public void add(char chr){
-        Node newNode = new Node(new CharData(chr));
-        if(this.first == null){
-            this.addFirst(chr);
-            return;
-        }
-
-        this.last.next = newNode;
-        this.last = newNode;
         this.size++;
     }
     
@@ -92,7 +68,6 @@ public class List {
         int index = this.indexOf(chr);
         if(index == -1){
             this.addFirst(chr);
-            // this.add(chr);
             return;
         }
         this.get(index).count++;
@@ -116,7 +91,7 @@ public class List {
             for(int i = 0; i < index - 1; i++){
                 prev = prev.next;
             }
-            temp = prev.next; // somehow it is null
+            temp = prev.next;
             prev.next = temp.next;
         }
         
@@ -165,14 +140,4 @@ public class List {
         // Returns an iterator that starts in that element
 	    return new ListIterator(current);
     }
-
-    // public static void main(String[] args) {
-    //     List l = new List();
-    //     l.addFirst('w');
-    //     l.addFirst('o');
-    //     l.addFirst('r');
-    //     l.addFirst('d');
-    //     System.out.println(l.toString());
-
-    // }
 }
