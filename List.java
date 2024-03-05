@@ -66,8 +66,7 @@ public class List {
             s.append(curr.cp.toString() + " ");
             curr = curr.next;
         }
-        s.append(")");
-        return s.toString();
+        return s.toString().substring(0, s.length()-1) + ")";
     }
 
     /** Returns the index of the first CharData object in this list
