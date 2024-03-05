@@ -134,15 +134,16 @@ public class LanguageModel {
         }
         StringBuilder output = new StringBuilder(initialText);
         String window = output.substring(output.length() - this.windowLength);
-        while (output.length() < textLength) {
+        for (int i = 0; i < textLength; i++) {
             List probs = this.CharDataMap.get(window);
             if(probs == null){
-                return "didnt reach to 172!";
+                return output.toString();
             }
             char c = this.getRandomChar(probs);
             output.append(c);
             window = window.substring(1) + c;
         }
+        System.out.println(output.length());
         return output.toString();
 	}
 
