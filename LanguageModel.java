@@ -143,7 +143,6 @@ public class LanguageModel {
             output.append(c);
             window = window.substring(1) + c;
         }
-        System.out.println(output.length());
         return output.toString();
 	}
 
@@ -158,13 +157,13 @@ public class LanguageModel {
 	}
 
     public static void main(String[] args) {
-        LanguageModel languageModel = new LanguageModel(7,20);
-        languageModel.train("originofspecies.txt");
-        String generatedText = languageModel.generate("Natural", 172);
-        String expectedGeneratedText = "Natural selection, how is it possible, generally much changed\n"+
-        "simultaneous rotation, when the importance of Batrachians, 393.\n"+
-        "  Batrachians (frogs, toads, newts) have to modified ";
-        System.err.println(generatedText);
+        // LanguageModel languageModel = new LanguageModel(7,20);
+        // languageModel.train("originofspecies.txt");
+        // String generatedText = languageModel.generate("Natural", 172);
+        // String expectedGeneratedText = "Natural selection, how is it possible, generally much changed\n"+
+        // "simultaneous rotation, when the importance of Batrachians, 393.\n"+
+        // "  Batrachians (frogs, toads, newts) have to modified ";
+        // System.err.println(generatedText);
 
         // boolean res = stringEqualsNoSpaces(generatedText, expectedGeneratedText);
         // if (!res){
@@ -176,21 +175,21 @@ public class LanguageModel {
 
 
         // MAIN //
-        // int windowLength = Integer.parseInt(args[0]);
-        // String initialText = args[1];
-        // int generatedTextLength = Integer.parseInt(args[2]);
-        // Boolean randomGeneration = args[3].equals("random");
-        // String fileName = args[4];
-        // // Create the LanguageModel object
-        // LanguageModel lm;
-        // if (randomGeneration){
-        //     lm = new LanguageModel(windowLength);
-        // } else {
-        //     lm = new LanguageModel(windowLength, 20);   
-        // }
-        // // Trains the model, creating the map.
-        // lm.train(fileName);
-        // // Generates text, and prints it.
-        // System.out.println(lm.generate(initialText, generatedTextLength));
+        int windowLength = Integer.parseInt(args[0]);
+        String initialText = args[1];
+        int generatedTextLength = Integer.parseInt(args[2]);
+        Boolean randomGeneration = args[3].equals("random");
+        String fileName = args[4];
+        // Create the LanguageModel object
+        LanguageModel lm;
+        if (randomGeneration){
+            lm = new LanguageModel(windowLength);
+        } else {
+            lm = new LanguageModel(windowLength, 20);   
+        }
+        // Trains the model, creating the map.
+        lm.train(fileName);
+        // Generates text, and prints it.
+        System.out.println(lm.generate(initialText, generatedTextLength));
     }
 }
