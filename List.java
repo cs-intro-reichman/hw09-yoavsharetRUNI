@@ -62,7 +62,7 @@ public class List {
         Node curr = this.first;
         StringBuilder s = new StringBuilder();
         while (curr != null) {
-            s.append(curr.cp.toString());
+            s.append(curr.cp.toString() + " ");
             curr = curr.next;
         }
         return s.toString();
@@ -112,10 +112,10 @@ public class List {
             this.first = this.first.next;
         } else {
             Node prev = this.first;
-            for(int i = 0; i < index; i++){
+            for(int i = 0; i < index - 1; i++){
                 prev = prev.next;
             }
-            temp = prev.next;
+            temp = prev.next; // somehow it is null
             prev.next = temp.next;
         }
         
@@ -166,11 +166,12 @@ public class List {
     }
 
     // public static void main(String[] args) {
-    //     String test = "comittee_";
-    //     List probs = new List();
-    //     for(int i = 0; i< test.length(); i++){
-    //         probs.update(test.charAt(i));
-    //     }
-    //     System.out.println(probs);
+    //     List l = new List();
+    //     l.addFirst('w');
+    //     l.addFirst('o');
+    //     l.addFirst('r');
+    //     l.addFirst('d');
+    //     System.out.println(l.toString());
+
     // }
 }
