@@ -61,10 +61,12 @@ public class List {
     public String toString() {
         Node curr = this.first;
         StringBuilder s = new StringBuilder();
+        s.append("(");
         while (curr != null) {
             s.append(curr.cp.toString() + " ");
             curr = curr.next;
         }
+        s.append(")");
         return s.toString();
     }
 
