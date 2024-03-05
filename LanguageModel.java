@@ -137,7 +137,7 @@ public class LanguageModel {
         while (output.length() < textLength) {
             List probs = this.CharDataMap.get(window);
             if(probs == null){
-                return output.toString();
+                return "didnt reach to 172!";
             }
             char c = this.getRandomChar(probs);
             output.append(c);
@@ -157,51 +157,39 @@ public class LanguageModel {
 	}
 
     public static void main(String[] args) {
-        // String test = "committee_";
-        // List probs = new List();
-        // for(int i = 0; i< test.length(); i++){
-        //     probs.update(test.charAt(i));
-        // }
+        LanguageModel languageModel = new LanguageModel(7,20);
+        languageModel.train("originofspecies.txt");
+        String generatedText = languageModel.generate("Natural", 172);
+        String expectedGeneratedText = "Natural selection, how is it possible, generally much changed\n"+
+        "simultaneous rotation, when the importance of Batrachians, 393.\n"+
+        "  Batrachians (frogs, toads, newts) have to modified ";
+        System.err.println(generatedText);
 
-        // LanguageModel lg = new LanguageModel(0);
-        // lg.calculateProbabilities(probs);
-        // System.out.println(probs);
-
-        // int[] histogram = new int[probs.getSize()];
-        // int N = 10000;
-        // for(int i = 0; i < N; i++){
-        //     histogram[probs.indexOf(lg.getRandomChar(probs))]++;
+        // boolean res = stringEqualsNoSpaces(generatedText, expectedGeneratedText);
+        // if (!res){
+        //     System.out.println("Expected: " + expectedGeneratedText);
+        //     System.out.println("Actual: " + generatedText);
+        //     System.out.println("FAIL with windowLength = 7, seed = 20, initialText = Natural, textLength = 172");
         // }
-
-        // ListIterator it = probs.listIterator(0);
-        // int i = 0;
-        // while (it.hasNext()) {
-        //     CharData curr = it.next();
-        //     System.out.println(curr.chr + " : " + histogram[i]/(double)N);
-        //     i++;
-        // }
-        
-        // LanguageModel lg = new LanguageModel(2);
-        // lg.train("testA.txt");
-        // System.out.println(lg.toString());
+        // return res;
 
 
         // MAIN //
-        int windowLength = Integer.parseInt(args[0]);
-        String initialText = args[1];
-        int generatedTextLength = Integer.parseInt(args[2]);
-        Boolean randomGeneration = args[3].equals("random");
-        String fileName = args[4];
-        // Create the LanguageModel object
-        LanguageModel lm;
-        if (randomGeneration){
-            lm = new LanguageModel(windowLength);
-        } else {
-            lm = new LanguageModel(windowLength, 20);   
-        }
-        // Trains the model, creating the map.
-        lm.train(fileName);
-        // Generates text, and prints it.
-        System.out.println(lm.generate(initialText, generatedTextLength));
+        // int windowLength = Integer.parseInt(args[0]);
+        // String initialText = args[1];
+        // int generatedTextLength = Integer.parseInt(args[2]);
+        // Boolean randomGeneration = args[3].equals("random");
+        // String fileName = args[4];
+        // // Create the LanguageModel object
+        // LanguageModel lm;
+        // if (randomGeneration){
+        //     lm = new LanguageModel(windowLength);
+        // } else {
+        //     lm = new LanguageModel(windowLength, 20);   
+        // }
+        // // Trains the model, creating the map.
+        // lm.train(fileName);
+        // // Generates text, and prints it.
+        // System.out.println(lm.generate(initialText, generatedTextLength));
     }
 }
