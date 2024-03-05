@@ -16,6 +16,7 @@ public class List {
     // }
     // Points to the first node in this list
     private Node first;
+    private Node last;
 
     // The number of elements in this list
     private int size;
@@ -40,6 +41,19 @@ public class List {
     public void addFirst(char chr) {
         Node newNode = new Node(new CharData(chr), first);
         this.first = newNode;
+        this.last = newNode;
+        this.size++;
+    }
+
+    public void add(char chr){
+        Node newNode = new Node(new CharData(chr));
+        if(this.first == null){
+            this.addFirst(chr);
+            return;
+        }
+
+        this.last.next = newNode;
+        this.last = newNode;
         this.size++;
     }
     
@@ -49,7 +63,6 @@ public class List {
         StringBuilder s = new StringBuilder();
         while (curr != null) {
             s.append(curr.cp.toString());
-            // System.out.println(curr.cp.toString());  // TODO: the requierments were not compatible with given func signiture
             curr = curr.next;
         }
         return s.toString();
@@ -78,6 +91,7 @@ public class List {
         int index = this.indexOf(chr);
         if(index == -1){
             this.addFirst(chr);
+            // this.add(chr);
             return;
         }
         this.get(index).count++;
@@ -94,7 +108,7 @@ public class List {
             return false;
         }
         if(index == 0){
-            temp = first;
+            // temp = this.first;
             this.first = this.first.next;
         } else {
             Node prev = this.first;
@@ -106,7 +120,7 @@ public class List {
         }
         
         this.size--;
-        temp = null;
+        // temp = null;
         return true;
     }
 
@@ -150,4 +164,13 @@ public class List {
         // Returns an iterator that starts in that element
 	    return new ListIterator(current);
     }
+
+    // public static void main(String[] args) {
+    //     String test = "comittee_";
+    //     List probs = new List();
+    //     for(int i = 0; i< test.length(); i++){
+    //         probs.update(test.charAt(i));
+    //     }
+    //     System.out.println(probs);
+    // }
 }

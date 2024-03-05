@@ -77,7 +77,8 @@ public class LanguageModel {
         int numOfChars = 0;
         ListIterator it = probs.listIterator(0);
         while (it.hasNext()) {
-            numOfChars += it.next().count;
+            CharData curr = it.next();
+            numOfChars += curr.count;
         }
         
         // populate p field
@@ -96,6 +97,15 @@ public class LanguageModel {
             curr.cp = prev.cp + curr.p;
             prev = curr;
         }
+        // CharData[] probsArray = probs.toArray();
+        // CharData prev = probsArray[probsArray.length - 1];
+        // prev.cp = prev.p;
+        // for(int i = (probsArray.length -2); i>=0; i--){
+        //     // the Char are inserted in reverse order
+        //     CharData curr = probsArray[i];
+        //     curr.cp = prev.cp + curr.p;
+        //     prev = curr;
+        // }
 	}
 
     // Returns a random character from the given probabilities list.
@@ -123,14 +133,15 @@ public class LanguageModel {
             return initialText;
         }
         StringBuilder output = new StringBuilder(initialText);
-        String window = output.substring(output.length()- this.windowLength);
+        String window = output.substring(output.length() - this.windowLength);
         while (output.length() < textLength) {
             List probs = this.CharDataMap.get(window);
             if(probs == null){
                 return output.toString();
             }
-            output.append(getRandomChar(probs));
-            window = output.substring(output.length()- this.windowLength);
+            char c = this.getRandomChar(probs);
+            output.append(c);
+            window = window.substring(1) + c;
         }
         return output.toString();
 	}
@@ -146,6 +157,36 @@ public class LanguageModel {
 	}
 
     public static void main(String[] args) {
+        // String test = "committee_";
+        // List probs = new List();
+        // for(int i = 0; i< test.length(); i++){
+        //     probs.update(test.charAt(i));
+        // }
+
+        // LanguageModel lg = new LanguageModel(0);
+        // lg.calculateProbabilities(probs);
+        // System.out.println(probs);
+
+        // int[] histogram = new int[probs.getSize()];
+        // int N = 10000;
+        // for(int i = 0; i < N; i++){
+        //     histogram[probs.indexOf(lg.getRandomChar(probs))]++;
+        // }
+
+        // ListIterator it = probs.listIterator(0);
+        // int i = 0;
+        // while (it.hasNext()) {
+        //     CharData curr = it.next();
+        //     System.out.println(curr.chr + " : " + histogram[i]/(double)N);
+        //     i++;
+        // }
+        
+        // LanguageModel lg = new LanguageModel(2);
+        // lg.train("testA.txt");
+        // System.out.println(lg.toString());
+
+
+        // MAIN //
         int windowLength = Integer.parseInt(args[0]);
         String initialText = args[1];
         int generatedTextLength = Integer.parseInt(args[2]);
